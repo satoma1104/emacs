@@ -84,6 +84,12 @@
 (global-set-key (kbd "M-[") 'switch-to-prev-buffer)
 (global-set-key (kbd "M-]") 'switch-to-next-buffer)
 
+
+;; ファイルの先頭が"#!"で始まるスクリプトの時は、自動的に実行属性をオンにする
+(add-hook 'after-save-hook
+          'executable-make-buffer-file-executable-if-script-p)
+
+
 ;(split-window-vertically)
 ;(enlarge-window 15)
 ;(split-window-horizontally)
