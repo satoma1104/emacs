@@ -83,7 +83,7 @@
 ; 現在行のハイライト表示を行うモードを列挙
 (add-hook 'emacs-lisp-mode-hook 'hl-line-mode)
 (add-hook 'c-mode-hook 'hl-line-mode)
-(add-hook 'c++-mode-hook '(hl-line-mode nil))
+(add-hook 'c++-mode-hook 'hl-line-mode)
 (add-hook 'dired-mode-hook 'hl-line-mode)
 (add-hook 'html-mode-hook 'hl-line-mode)
 (add-hook 'nxml-mode-hook 'hl-line-mode)
@@ -106,6 +106,36 @@
 (setq linum-delay t)
 (defadvice linum-schedule (around my-linum-schedule () activate)
   (run-with-idle-timer 0.2 nil #'linum-update-current))
+
+
+;;--- カーソル下にあるシンボルをハイライト表示する
+;; （highlight-symbolパッケージのインストールが前提）
+; 以下をコメントアウトすると、ハイライト表示で使う色を自分で設定でき、その設定を
+; repeatしてくれる
+;(setq highlight-symbol-colors '("DarkOrange" "DodgerBlue1" "DeepPink1"))
+; 自動ハイライトを有効にしたいメジャーモードを設定
+(add-hook 'emacs-lisp-mode-hook 'highlight-symbol-mode)
+(add-hook 'c-mode-hook 'highlight-symbol-mode)
+(add-hook 'c++-mode-hook 'highlight-symbol-mode)
+(add-hook 'html-mode-hook 'highlight-symbol-mode)
+(add-hook 'nxml-mode-hook 'highlight-symbol-mode)
+(add-hook 'text-mode-hook 'highlight-symbol-mode)
+(add-hook 'python-mode-hook 'highlight-symbol-mode)
+; M-nとM-pによるハイライト対象シンボル間移動を有効にするメジャーモードを設定
+(add-hook 'emacs-lisp-mode-hook 'highlight-symbol-nav-mode)
+(add-hook 'c-mode-hook 'highlight-symbol-nav-mode)
+(add-hook 'c++-mode-hook 'highlight-symbol-nav-mode)
+(add-hook 'html-mode-hook 'highlight-symbol-nav-mode)
+(add-hook 'nxml-mode-hook 'highlight-symbol-nav-mode)
+(add-hook 'text-mode-hook 'highlight-symbol-nav-mode)
+(add-hook 'python-mode-hook 'highlight-symbol-nav-mode)
+;; キーバインドの設定
+; 現在のシンボルに手動で色付け
+(global-set-key (kbd "<f7>") 'highlight-symbol-at-point)
+; ハイライトシンボルに対して置換処理を実行
+(global-set-key (kbd "M-<f7> %") 'highlight-symbol-query-replace)
+; 手動色付けを全てクリアする
+(global-set-key (kbd "M-<f7> RET") 'highlight-symbol-remove-all)
 
 
 ;;--- emacs起動後に実行する各種カスタマイズ（外観に関連するもの）

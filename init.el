@@ -39,7 +39,7 @@
  '(global-font-lock-mode t nil (font-lock))
  '(package-selected-packages
    (quote
-    (magit rainbow-mode company-quickhelp expand-region mark-multiple company flycheck ## flylisp)))
+    (highlight-symbol auto-highlight-symbol magit rainbow-mode company-quickhelp expand-region mark-multiple company flycheck ## flylisp)))
  '(show-paren-mode t nil (paren))
  '(transient-mark-mode t))
 
@@ -83,10 +83,6 @@
 ;; バッファの切り替えができるようにする
 (global-set-key (kbd "M-[") 'switch-to-prev-buffer)
 (global-set-key (kbd "M-]") 'switch-to-next-buffer)
-
-;; カーソルの位置を固定したまま上下スクロールができるようにする
-(global-set-key (kbd "M-n") (lambda () (interactive) (scroll-up 1)))
-(global-set-key (kbd "M-p") (lambda () (interactive) (scroll-down 1)))
 
 ;(split-window-vertically)
 ;(enlarge-window 15)
