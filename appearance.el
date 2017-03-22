@@ -10,7 +10,7 @@
 (set-face-foreground 'tooltip "black")       ;; ツールチップの文字色
 (set-face-background 'tooltip "wheat")       ;; ツールチップの背景色
 (set-face-font       'tooltip "ricty-18")    ;; ツールチップで表示されるフォント
-(set-cursor-color "white")
+(set-cursor-color "hot pink")
 ;; モードラインの文字の色を設定します。
 (set-face-foreground 'mode-line "yellow")
 ;; モードラインの背景色を設定します。
