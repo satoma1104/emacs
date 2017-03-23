@@ -12,22 +12,19 @@
 (load-file "~/.emacs.d/sato.el")
 
 ;; 日本語の設定
-(load-file "~/emacs/japanese.el")
+(load-file "~/.emacs.d/japanese.el")
 
 ;; turn on font-lock mode
 (global-font-lock-mode t)
 
-;; enable visual feedback on selections
-(setq transient-mark-mode t)
-
 ;; ug-mode
-(load-file "~/emacs/ug.el")
+;(load-file "~/emacs/ug.el")
 
 ;; ユーザプログラム起動用パッケージ
-(load-file "~/emacs/user-program.el")
+;(load-file "~/emacs/user-program.el")
 
 ;; コメント自動入力パッケージ
-(load-file "~/emacs/comment.el")
+(load-file "~/.emacs.d/comment.el")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -39,9 +36,9 @@
  '(global-font-lock-mode t nil (font-lock))
  '(package-selected-packages
    (quote
-    (highlight-symbol auto-highlight-symbol magit rainbow-mode company-quickhelp expand-region mark-multiple company flycheck ## flylisp)))
+    (wgrep browse-kill-ring+ browse-kill-ring highlight-symbol auto-highlight-symbol magit rainbow-mode company-quickhelp expand-region mark-multiple company flycheck ## flylisp)))
  '(show-paren-mode t nil (paren))
- '(transient-mark-mode t))
+ )
 
 
 ;; MELPAの設定
@@ -71,18 +68,26 @@
             (define-key sgml-mode-map (kbd "C-c C-r") 'rename-sgml-tag)))
 
 
-;; expand region（選択範囲の拡大および縮小機能）
-;;(add-to-list 'load-path "~/.emacs.d/expand-region.el")
-(require 'expand-region)
+;;--- expand region（選択範囲の拡大および縮小機能）
+;; (expand-regionがインストールされている必要がある)
 (global-set-key (kbd "C-@") 'er/expand-region)
 (global-set-key (kbd "C-M-@") 'er/contract-region) ;; リージョンを狭める
-
-;; transient-mark-modeが nilでは動作しませんので注意
-(transient-mark-mode t)
 
 ;; バッファの切り替えができるようにする
 (global-set-key (kbd "M-[") 'switch-to-prev-buffer)
 (global-set-key (kbd "M-]") 'switch-to-next-buffer)
+
+;; browse-kill-ringの機能をM-yで使用できるようにする
+(browse-kill-ring-default-keybindings)
+
+
+;;;--- wgrep関係の設定(grepバッファの編集)
+;; eでwgrepモードにする
+(setf wgrep-enable-key "e")
+;; wgrep終了時にバッファを保存
+(setq wgrep-auto-save-buffer t)
+;; read-only bufferにも変更を適用する
+(setq wgrep-change-readonly-file t)
 
 
 ;; ファイルの先頭が"#!"で始まるスクリプトの時は、自動的に実行属性をオンにする
@@ -96,10 +101,3 @@
 
 (provide 'init)
 ;;; init.el ends here
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(hl-line ((t (:background "midnight blue")))))

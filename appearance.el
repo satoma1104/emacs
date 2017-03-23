@@ -48,9 +48,6 @@
 ;; 起動画面を表示しない
 (setq inhibit-startup-screen t)
 
-;; リージョンのハイライト表示を行う
-(transient-mark-mode 1)
-
 ;; 対応する括弧をハイライト表示する
 (show-paren-mode 1)
 
