@@ -112,8 +112,5 @@
 (autoload 'svn-status "dsvn" "Run `svn status'." t)
 (autoload 'svn-update "dsvn" "Run `svn update'." t)
 
-;; Shift + カーソルキーで、ウィンドウ間を自由に行き来できるようにする設定
-(windmove-default-keybindings)
-
 ;; ビープ音を消す
 (setq ring-bell-function 'ignore)

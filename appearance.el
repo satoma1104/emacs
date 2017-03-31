@@ -10,7 +10,6 @@
 (set-face-foreground 'tooltip "black")       ;; ツールチップの文字色
 (set-face-background 'tooltip "wheat")       ;; ツールチップの背景色
 (set-face-font       'tooltip "ricty-18")    ;; ツールチップで表示されるフォント
-(set-cursor-color "hot pink")
 ;; モードラインの文字の色を設定します。
 (set-face-foreground 'mode-line "yellow")
 ;; モードラインの背景色を設定します。
@@ -44,6 +43,8 @@
   (set-face-background 'default "black")   ;; 標準の背景色
   (set-face-foreground 'default "white")   ;; 標準の文字色
   )
+
+(set-cursor-color "hot pink")
 
 ;; 起動画面を表示しない
 (setq inhibit-startup-screen t)
@@ -138,9 +139,11 @@
 ;;--- emacs起動後に実行する各種カスタマイズ（外観に関連するもの）
 (add-hook 'emacs-startup-hook
 	  (lambda ()
+	    (split-window-horizontally)  ; 画面を左右に２分割する
 	    (split-window-vertically)    ; 画面を上下に２分割する
 	    (enlarge-window 15)          ; ウィンドサイズを15行分縦に拡げる
-	    (split-window-horizontally)  ; 画面を左右に２分割する
+	    (split-window-vertically)    ; 画面を上下に２分割する
+	    (enlarge-window 15)          ; ウィンドサイズを15行分縦に拡げる
 	    ))
 
 (provide 'appearance)

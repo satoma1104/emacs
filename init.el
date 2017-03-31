@@ -36,9 +36,8 @@
  '(global-font-lock-mode t nil (font-lock))
  '(package-selected-packages
    (quote
-    (wgrep browse-kill-ring+ browse-kill-ring highlight-symbol auto-highlight-symbol magit rainbow-mode company-quickhelp expand-region mark-multiple company flycheck ## flylisp)))
- '(show-paren-mode t nil (paren))
- )
+    (sticky smooth-scroll smooth-scrolling win-switch wgrep browse-kill-ring+ browse-kill-ring highlight-symbol auto-highlight-symbol magit rainbow-mode company-quickhelp expand-region mark-multiple company flycheck ## flylisp)))
+ '(show-paren-mode t nil (paren)))
 
 
 ;; MELPAの設定
@@ -74,14 +73,24 @@
 (global-set-key (kbd "C-M-@") 'er/contract-region) ;; リージョンを狭める
 
 ;; バッファの切り替えができるようにする
-(global-set-key (kbd "M-[") 'switch-to-prev-buffer)
-(global-set-key (kbd "M-]") 'switch-to-next-buffer)
+(global-set-key (kbd "M-[") 'switch-to-next-buffer)
+(global-set-key (kbd "M-]") 'switch-to-prev-buffer)
 
 ;; browse-kill-ringの機能をM-yで使用できるようにする
 (browse-kill-ring-default-keybindings)
 
+;; バッファ削除を簡単にできるようにする
+(global-set-key (kbd "C-S-k") 'kill-buffer)
 
-;;;--- wgrep関係の設定(grepバッファの編集)
+;; diredを簡単に開く
+(global-set-key (kbd "C-S-d") 'dired)
+
+
+;; スクロールを滑らかにする
+(smooth-scrolling-mode t)
+
+
+;;;--- Wgrep関係の設定(grepバッファの編集)
 ;; eでwgrepモードにする
 (setf wgrep-enable-key "e")
 ;; wgrep終了時にバッファを保存
@@ -95,9 +104,38 @@
           'executable-make-buffer-file-executable-if-script-p)
 
 
-;(split-window-vertically)
-;(enlarge-window 15)
-;(split-window-horizontally)
+;; Shift + カーソルキーで、ウィンドウ間を自由に行き来できるようにする設定
+(windmove-default-keybindings)
+(global-set-key (kbd "C-S-o") 'other-window)
+(global-set-key (kbd "C-z") 'undo)
+
+;; 行番号による移動
+(global-set-key (kbd "C-S-l") 'goto-line)
+(load-file "~/.emacs.d/fast-cursor-move.el")
+
+
+;; 反対側のウィンドウにいけるように
+(setq windmove-wrap-around t)
+
+;; diredバッファでC-sした時にファイル名だけにマッチするように
+(setq dired-isearch-filenames t)
+
+;; 指定されたキーが押された時は、１文字だけSHIFTキーに相当する効果を与える
+;; （sticky.elがインストールされていることが前提）
+(require 'sticky)
+; 以下では、"@"が押された時にstickyモードを有効にする
+(use-sticky-key ?@ sticky-alist:ja)
+
+;; 以下で指定したバッファは、カレントウィンドウに強制表示する
+(add-to-list 'same-window-buffer-names "*Buffer List*")
+;; 以下で指定したバッファは、カレントウィンドウとは別ウィンドウに強制表示する
+;(add-to-list 'special-display-buffer-names "ここにバッファ名を記述する")
 
 (provide 'init)
 ;;; init.el ends here
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(hl-line ((t (:background "midnight blue")))))
