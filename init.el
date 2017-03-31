@@ -6,6 +6,9 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
+;; MELPAの設定
+(load-file "~/.emacs.d/melpa.el")
+
 ;; 外観の設定
 (load-file "~/.emacs.d/appearance.el")
 
@@ -39,9 +42,6 @@
     (sticky smooth-scroll smooth-scrolling win-switch wgrep browse-kill-ring+ browse-kill-ring highlight-symbol auto-highlight-symbol magit rainbow-mode company-quickhelp expand-region mark-multiple company flycheck ## flylisp)))
  '(show-paren-mode t nil (paren)))
 
-
-;; MELPAの設定
-(load-file "~/.emacs.d/melpa.el")
 
 ;; 開発環境の整備
 ;; flycheckの設定
