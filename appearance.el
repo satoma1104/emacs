@@ -1,5 +1,5 @@
 ;; 各種カラーを変更する
-;; (サポートする色の種類は"$EMACS/$VERSION/etc/rgb.txt"を参照)
+;; (設定できる色の名称は、"M-x list-colors-display" で確認できる)
 (set-background-color "#111133")         ;; 標準の背景色
 (set-face-background 'default "#111133") ;; 標準の背景色
 (set-face-foreground 'default "white")   ;; 標準の文字色
@@ -141,6 +141,21 @@
 	  (lambda ()
 	    (dired-hide-details-mode t)
 	    ))
+
+
+;;--- mark-multiple用の色設定
+; 選択したテキストの背景
+(custom-set-faces '(mm/master-face
+		    ((((class color) (background light))
+		      (:background "DarkSeaGreen1"))
+		     (t (:background "dark olive green")))
+		     ))
+; 同時に変更したいテキストの背景
+(custom-set-faces '(mm/mirror-face
+		    ((((class color) (background light))
+		      (:background "DarkSeaGreen1"))
+		     (t (:background "olive drab")))
+		     ))
 
 
 ;;--- emacs起動後に実行する各種カスタマイズ（外観に関連するもの）
