@@ -69,12 +69,12 @@
 
 ;;--- expand region（選択範囲の拡大および縮小機能）
 ;; (expand-regionがインストールされている必要がある)
-(global-set-key (kbd "C-@") 'er/expand-region)
-(global-set-key (kbd "C-M-@") 'er/contract-region) ;; リージョンを狭める
+(global-set-key (kbd "C-@") 'er/expand-region)   ;; リージョンを拡げる
+(global-set-key (kbd "M-@") 'er/contract-region) ;; リージョンを狭める
 
 ;; バッファの切り替えができるようにする
-(global-set-key (kbd "M-[") 'switch-to-next-buffer)
-(global-set-key (kbd "M-]") 'switch-to-prev-buffer)
+(global-set-key (kbd "C-{") 'switch-to-next-buffer)
+(global-set-key (kbd "C-}") 'switch-to-prev-buffer)
 
 ;; browse-kill-ringの機能をM-yで使用できるようにする
 (browse-kill-ring-default-keybindings)
@@ -127,9 +127,13 @@
 (use-sticky-key ?@ sticky-alist:ja)
 
 ;; 以下で指定したバッファは、カレントウィンドウに強制表示する
-(add-to-list 'same-window-buffer-names "*Buffer List*")
+;(add-to-list 'same-window-buffer-names "*Buffer List*")
 ;; 以下で指定したバッファは、カレントウィンドウとは別ウィンドウに強制表示する
-;(add-to-list 'special-display-buffer-names "ここにバッファ名を記述する")
+(add-to-list 'special-display-buffer-names "*BufferList*")
+
+;; Ctrl-hにバックスペース機能を割り当てる
+(define-key key-translation-map (kbd "C-h") (kbd "<DEL>"))
+
 
 (provide 'init)
 ;;; init.el ends here

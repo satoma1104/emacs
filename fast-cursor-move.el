@@ -1,17 +1,17 @@
 (defun fast-cursor-move-forward-line()
   (interactive)
   (let (column)
-    (setq column 'current-column)
+    (setq column (current-column))
     (forward-line 10)
-    (foward-char 5)
+    (move-to-column column)
     ))
 
 (defun fast-cursor-move-backward-line()
   (interactive)
   (let (column)
-    (setq column 'current-column)
+    (setq column (current-column))
     (forward-line -10)
-    (foward-char column))
+    (move-to-column column))
 )
 
 
