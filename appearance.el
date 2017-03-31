@@ -25,7 +25,7 @@
       (setq initial-frame-alist
 	    (append (list
 		     ;; サイズ
-		     '(width .  174)  ; 横幅（桁数）
+		     '(width .  224)  ; 横幅（桁数）
 		     '(height . 88) ; 高さ（行数）
 		     ;; 位置
 		     '(top . 7)  ; フレーム左上角 y 座標（ピクセル）
@@ -136,14 +136,28 @@
 (global-set-key (kbd "M-<f7> RET") 'highlight-symbol-remove-all)
 
 
+;; diredモードの時は、ファイル名のみの表示をデフォルトとする。
+(add-hook 'dired-mode-hook
+	  (lambda ()
+	    (dired-hide-details-mode t)
+	    ))
+
+
 ;;--- emacs起動後に実行する各種カスタマイズ（外観に関連するもの）
 (add-hook 'emacs-startup-hook
 	  (lambda ()
-	    (split-window-horizontally)  ; 画面を左右に２分割する
-	    (split-window-vertically)    ; 画面を上下に２分割する
-	    (enlarge-window 15)          ; ウィンドサイズを15行分縦に拡げる
-	    (split-window-vertically)    ; 画面を上下に２分割する
-	    (enlarge-window 15)          ; ウィンドサイズを15行分縦に拡げる
+	    (split-window-horizontally)  ; 画面を左右に２分割
+	    (shrink-window-horizontally 20) ; ウィンドウサイズを20桁分縮める
+	    (split-window-vertically)    ; 画面を上下に２分割
+	    (other-window 2)             ; ２つ先のウィンドウに移動
+	    (split-window-horizontally)  ; 画面を左右に２分割
+	    (other-window 1)             ; 隣のウィンドウに移動
+	    (split-window-vertically)    ; 画面を上下に２分割
+	    (enlarge-window 15)          ; ウィンドウサイズを15行分縦に拡げる
+	    (split-window-vertically)    ; 画面を上下に２分割
+	    (enlarge-window 15)          ; ウィンドウサイズを15行分縦に拡げる
+	    (other-window 4)             ; ウィンドウ移動
+	    (dired ".")                  ; diredを初めに起動させておく
 	    ))
 
 (provide 'appearance)
