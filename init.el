@@ -14,8 +14,9 @@
 
 (load-file "~/.emacs.d/sato.el")
 
-;; 日本語の設定
-(load-file "~/.emacs.d/japanese.el")
+;; 日本語の設定（Windows環境以外なら、anthyを使う）
+(when (not (eq system-type 'windows-nt))
+  (load-file "~/.emacs.d/japanese.el"))
 
 ;; turn on font-lock mode
 (global-font-lock-mode t)
@@ -39,7 +40,7 @@
  '(global-font-lock-mode t nil (font-lock))
  '(package-selected-packages
    (quote
-    (sticky smooth-scroll smooth-scrolling win-switch wgrep browse-kill-ring+ browse-kill-ring highlight-symbol auto-highlight-symbol magit rainbow-mode company-quickhelp expand-region mark-multiple company flycheck ## flylisp)))
+    (sticky  win-switch wgrep browse-kill-ring+ browse-kill-ring highlight-symbol auto-highlight-symbol rainbow-mode company-quickhelp expand-region mark-multiple company flycheck ## flylisp)))
  '(show-paren-mode t nil (paren)))
 
 
@@ -70,7 +71,7 @@
 ;;--- expand region（選択範囲の拡大および縮小機能）
 ;; (expand-regionがインストールされている必要がある)
 (global-set-key (kbd "C-@") 'er/expand-region)   ;; リージョンを拡げる
-(global-set-key (kbd "M-@") 'er/contract-region) ;; リージョンを狭める
+(global-set-key (kbd "C-M-@") 'er/contract-region) ;; リージョンを狭める
 
 ;; バッファの切り替えができるようにする
 (global-set-key (kbd "C-{") 'switch-to-next-buffer)
@@ -87,7 +88,7 @@
 
 
 ;; スクロールを滑らかにする
-(smooth-scrolling-mode t)
+;(smooth-scrolling-mode t)
 
 
 ;;;--- Wgrep関係の設定(grepバッファの編集)
@@ -137,9 +138,3 @@
 
 (provide 'init)
 ;;; init.el ends here
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(hl-line ((t (:background "midnight blue")))))
