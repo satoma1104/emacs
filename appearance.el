@@ -9,7 +9,7 @@
 (set-face-background 'scroll-bar "#333366")  ;; スクロールバー
 (set-face-foreground 'tooltip "black")       ;; ツールチップの文字色
 (set-face-background 'tooltip "wheat")       ;; ツールチップの背景色
-(set-face-font       'tooltip "ricty-18")    ;; ツールチップで表示されるフォント
+(set-face-font       'tooltip "Ricty Diminished-18")    ;; ツールチップで表示されるフォント
 ;; モードラインの文字の色を設定します。
 (set-face-foreground 'mode-line "yellow")
 ;; モードラインの背景色を設定します。
@@ -21,7 +21,7 @@
 ;; フレームパラメータ初期値の設定
 (if (and window-system (>= emacs-major-version 23))
     (progn
-      (set-frame-font "ricty-24")
+      (set-frame-font "Ricty Diminished-24")
       (setq initial-frame-alist
 	    (append (list
 		     ;; サイズ
