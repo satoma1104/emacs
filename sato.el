@@ -107,10 +107,5 @@
 	     (setq eshell-password-prompt-regexp
 		   (concat eshell-password-prompt-regexp "\\|パスワード.*:\\s *\\'"))))
 
-;; dsvnのための設定
-(load-file "~/emacs/dsvn.el")
-(autoload 'svn-status "dsvn" "Run `svn status'." t)
-(autoload 'svn-update "dsvn" "Run `svn update'." t)
-
 ;; ビープ音を消す
 (setq ring-bell-function 'ignore)
